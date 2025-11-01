@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS symbols (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users_symbols (
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    symbol_id INTEGER NOT NULL REFERENCES symbols(id),
+    PRIMARY KEY (user_id, symbol_id)
+);
